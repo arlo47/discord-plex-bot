@@ -1,0 +1,9 @@
+{
+  "testTimeout": 5000,
+  "transform": {
+    "^.+\\.(ts|tsx)$": "ts-jest"
+  },
+  "verbose": true,
+  "testEnvironment": "node",
+  "roots": ["<rootDir/src"]
+}
