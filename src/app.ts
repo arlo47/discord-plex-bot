@@ -1,9 +1,12 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-import { Client, GatewayIntentBits, Events, Message } from 'discord.js';
+import { Client, GatewayIntentBits } from 'discord.js';
+import fs from 'fs';
+import path from 'path';
 
 import { getConfig } from './utils/config';
+import server from './api/server';
 
 const config = getConfig();
 
@@ -11,18 +14,28 @@ const client: Client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
 });
 
-client.on(Events.ClientReady, () => {
-  console.log(`Logged in as ${client?.user?.tag}!`);
+const eventsPath = path.join(__dirname, 'events');
+const eventFiles = fs.readdirSync(eventsPath).filter((file) => {
+  return file.endsWith('.js') || file.endsWith('.ts');
 });
 
-client.on(Events.MessageCreate, async (message: Message) => {
-  console.log('message event hit!');
+eventFiles.forEach(async (file) => {
+  const filePath = path.join(eventsPath, file);
+  const { name, once, execute } = await import(filePath);
 
-  if (message.author.bot) {
-    return;
+  if (once) {
+    client.once(name, (...args) => {
+      execute(...args);
+    });
+  } else {
+    client.on(name, (...args) => {
+      execute(...args);
+    });
   }
-
-  message.channel.send('PONG');
 });
 
 client.login(config.discord.token);
+
+server.listen(config.server.port, () => {
+  console.log(`Server listening on ${config.server.port}`);
+});
