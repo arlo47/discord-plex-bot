@@ -9,7 +9,9 @@
     "dev": "concurrently npm:dev:*",
     "start": "node dist/app.js",
     "test": "jest",
-    "build": "tsc"
+    "build": "tsc",
+    "lint:check": "eslint .",
+    "format:check": "prettier ."
   },
   "keywords": [
     "discord",
