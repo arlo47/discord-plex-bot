@@ -22,8 +22,8 @@ jobs:
       - name: Get NPM Version
         run: npm -v
       - name: Run Formatter
-        run: npm format:check
+        run: npm run format:check
       - name: Run Linter
-        run: npmlint:check
+        run: npm run lint:check
       - name: Run Unit Tests
         run: npm test

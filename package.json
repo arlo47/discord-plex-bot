@@ -10,8 +10,8 @@
     "start": "node dist/app.js",
     "test": "jest",
     "build": "tsc",
-    "lint:check": "eslint .",
-    "format:check": "prettier ."
+    "lint:check": "npx eslint .",
+    "format:check": "npx prettier ."
   },
   "keywords": [
     "discord",
