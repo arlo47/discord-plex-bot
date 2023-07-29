@@ -3,9 +3,10 @@
 name: discord-plex-bot-ci
 run-name: Build & Test
 on: [push]
+
 jobs:
   install:
-    name: Install OS & Node
+    name: Build & Test
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
@@ -15,7 +16,9 @@ jobs:
       - run: npm install
       - run: node -v
       - run: npm -v
+
   test:
+    needs: install
     name: Run Unit Tests
     runs-on: ubuntu-latest
     steps:
