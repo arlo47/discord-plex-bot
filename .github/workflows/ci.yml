@@ -4,17 +4,21 @@ name: discord-plex-bot-ci
 run-name: Build & Test
 on: [push]
 
+env:
+  RUNNER_OS: ubuntu-22.04
+  NODE_VERSION: 18
+
 jobs:
-  install:
+  check:
     name: Build & Test
-    runs-on: ubuntu-22.04
+    runs-on: $RUNNER_OS
     steps:
-      - name: Checkout Branch
+      - name: Step Up & Run Checks
         uses: actions/checkout@v3
       - name: Install Node
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: $NODE_VERSION
       - name: Install Dependencies
         run: npm install
       - name: Get Node Version
@@ -27,3 +31,11 @@ jobs:
         run: npm run lint:check
       - name: Run Unit Tests
         run: npm test
+
+  deploy:
+    runs-on: $RUNNER_OS
+    needs: check
+    if: success() && github.ref == 'refs/heads/master'
+    steps:
+      - name: Deploy
+        run: process.exit(0)
