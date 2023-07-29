@@ -30,10 +30,9 @@ jobs:
       - name: Compile TypeScript
         run: npm run build
 
-  deploy:
-    runs-on: ubuntu-22.04
-    needs: check
-    if: success() && github.ref == 'refs/heads/master'
-    steps:
-      - name: Deploy
-        run: process.exit(0)
+  # deploy:
+  #   runs-on: ubuntu-22.04
+  #   needs: check
+  #   if: success() && github.ref == 'refs/heads/master'
+  #   steps:
+  #     - name: Deploy
