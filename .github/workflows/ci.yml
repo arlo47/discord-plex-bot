@@ -1,0 +1,16 @@
+# GitHub Actions Tutorial: https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions
+
+name: discord-plex-bot-ci
+run-name: Build & Test
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm install
+      - run: node -v
+      - run: npm -v
