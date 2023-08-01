@@ -50,7 +50,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/discord-plex-bot:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/discord-plex-bot:latest
 
   # deploy:
   #   runs-on: ubuntu-22.04
