@@ -1,8 +1,16 @@
 # GitHub Actions Tutorial: https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions
 
+# https://faun.pub/full-ci-cd-with-docker-github-actions-digitalocean-droplets-container-registry-db2938db8246
+
+# https://docs.digitalocean.com/products/container-registry/how-to/use-registry-docker-kubernetes/
+
 name: discord-plex-bot-ci
 run-name: Build & Test
 on: [push]
+
+env:
+  REGISTRY: 'registry.digitalocean.com/discord-plex-bot-image'
+  IMAGE_NAME: 'discord-plex-bot-image'
 
 jobs:
   check:
@@ -38,23 +46,27 @@ jobs:
       - name: Compile TypeScript
         run: npm run build
 
-      - name: Login To DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+  deploy:
+    runs-on: ubuntu-22.04
+    needs: check
+    # if: success() && github.ref == 'refs/heads/master'
+    steps:
+      - name: Step Up & Run Checks
+        uses: actions/checkout@v3
 
-      - name: Build & Push
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/discord-plex-bot:latest
+      - name: Build container image
+        run: docker build -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
 
-  # deploy:
-  #   runs-on: ubuntu-22.04
-  #   needs: check
-  #   if: success() && github.ref == 'refs/heads/master'
-  #   steps:
-  #     - name: Deploy
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 600
+
+      - name: Remove all old images
+        run: if [ ! -z "$(doctl registry repository list | grep "$(echo $IMAGE_NAME)")" ]; then doctl registry repository delete-manifest $(echo $IMAGE_NAME) $(doctl registry repository list-tags $(echo $IMAGE_NAME) | grep -o "sha.*") --force; else echo "No repository"; fi
+
+      - name: Push image to DigitalOcean Container Registry
+        run: docker push $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
