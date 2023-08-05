@@ -41,37 +41,37 @@ jobs:
       - name: Compile TypeScript
         run: npm run build
 
-  # build:
-  #   name: Build & Push Docker Image
-  #   runs-on: ubuntu-22.04
-  #   needs: check
-  #   if: success() && github.ref == 'refs/heads/master'
+  build:
+    name: Build & Push Docker Image
+    runs-on: ubuntu-22.04
+    needs: check
+    if: success() && github.ref == 'refs/heads/master'
 
-  #   steps:
-  #     - name: Checkout Branch
-  #       uses: actions/checkout@v3
+    steps:
+      - name: Checkout Branch
+        uses: actions/checkout@v3
 
-  #     - name: Build Image
-  #       run: docker build -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
+      - name: Build Image
+        run: docker build -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
 
-  #     - name: Install doctl
-  #       uses: digitalocean/action-doctl@v2
-  #       with:
-  #         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-  #     - name: Log In To DigitalOcean Container Registry
-  #       run: doctl registry login --expiry-seconds 600
+      - name: Log In To DigitalOcean Container Registry
+        run: doctl registry login --expiry-seconds 600
 
-  #     - name: Remove Old Image
-  #       run: if [ ! -z "$(doctl registry repository list | grep "$(echo $IMAGE_NAME)")" ]; then doctl registry repository delete-manifest $(echo $IMAGE_NAME) $(doctl registry repository list-tags $(echo $IMAGE_NAME) | grep -o "sha.*") --force; else echo "No repository"; fi
+      - name: Remove Old Image
+        run: if [ ! -z "$(doctl registry repository list | grep "$(echo $IMAGE_NAME)")" ]; then doctl registry repository delete-manifest $(echo $IMAGE_NAME) $(doctl registry repository list-tags $(echo $IMAGE_NAME) | grep -o "sha.*") --force; else echo "No repository"; fi
 
-  #     - name: Push image to DigitalOcean Container Registry
-  #       run: docker push $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+      - name: Push image to DigitalOcean Container Registry
+        run: docker push $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
 
   deploy:
     name: Deploy Image
     runs-on: ubuntu-22.04
-    # needs: build
+    needs: build
     if: success() && github.ref == 'refs/heads/master'
 
     steps:
@@ -81,19 +81,18 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSHKEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
+          password: ${{ secrets.PASSWORD }}
+          # passphrase: ${{ secrets.PASSPHRASE }}
           envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_SHA
           script: |
-            ls
-          # script: |
-          #   # Login to registry
-          #   docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
-          #   # Stop running container
-          #   docker stop $(echo $IMAGE_NAME)
-          #   # Remove old container
-          #   docker rm $(echo $IMAGE_NAME)
-          #   # Run a new container from a new image
-          #   docker run -d \
-          #   --restart always \
-          #   --name $(echo $IMAGE_NAME) \
-          #   $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+            # Login to registry
+            docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
+            # Stop running container
+            docker stop $(echo $IMAGE_NAME)
+            # Remove old container
+            docker rm $(echo $IMAGE_NAME)
+            # Run a new container from a new image
+            docker run -d \
+            --restart always \
+            --name $(echo $IMAGE_NAME) \
+            $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
