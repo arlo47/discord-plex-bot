@@ -70,7 +70,7 @@ jobs:
 
   deploy:
     name: Deploy Image
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     # needs: build
     if: success() && github.ref == 'refs/heads/master'
 
