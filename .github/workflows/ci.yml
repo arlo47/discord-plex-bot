@@ -68,13 +68,6 @@ jobs:
       - name: Push image to DigitalOcean Container Registry
         run: docker push $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
 
-  deploy:
-    name: Deploy Image
-    runs-on: ubuntu-22.04
-    needs: build
-    if: success() && github.ref == 'refs/heads/master'
-
-    steps:
       - name: Deploy Image To Droplet
         uses: appleboy/ssh-action@v0.1.3
         with:
@@ -87,15 +80,24 @@ jobs:
           script: |
             docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
             docker -v
-          # script: |
-          #   # Login to registry
-          #   docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
-          #   # Stop running container
-          #   docker stop $(echo $IMAGE_NAME)
-          #   # Remove old container
-          #   docker rm $(echo $IMAGE_NAME)
-          #   # Run a new container from a new image
-          #   docker run -d \
-          #   --restart always \
-          #   --name $(echo $IMAGE_NAME) \
-          #   $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+
+  # deploy:
+  #   name: Deploy Image
+  #   runs-on: ubuntu-22.04
+  #   needs: build
+  #   if: success() && github.ref == 'refs/heads/master'
+
+  #   steps:
+
+  # script: |
+  #   # Login to registry
+  #   docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
+  #   # Stop running container
+  #   docker stop $(echo $IMAGE_NAME)
+  #   # Remove old container
+  #   docker rm $(echo $IMAGE_NAME)
+  #   # Run a new container from a new image
+  #   docker run -d \
+  #   --restart always \
+  #   --name $(echo $IMAGE_NAME) \
+  #   $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
