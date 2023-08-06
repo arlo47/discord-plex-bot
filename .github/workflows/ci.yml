@@ -80,9 +80,10 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          # key: ${{ secrets.SSHKEY }}
-          # passphrase: ${{ secrets.PASSPHRASE }}
+          # password: ${{ secrets.PASSWORD }}
+          key: ${{ secrets.SSHKEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          port: ${{ secrets.PORT }}
           envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_SHA
           script: |
             # Login to registry
