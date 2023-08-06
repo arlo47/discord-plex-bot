@@ -2,7 +2,7 @@
 
 # https://faun.pub/full-ci-cd-with-docker-github-actions-digitalocean-droplets-container-registry-db2938db8246
 
-# https://docs.digitalocean.com/products/container-registry/how-to/use-registry-docker-kubernetes/
+#  https://docs.digitalocean.com/products/container-registry/how-to/use-registry-docker-kubernetes/
 
 name: discord-plex-bot-ci
 run-name: Build & Test
