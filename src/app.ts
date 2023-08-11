@@ -7,7 +7,7 @@ import server from './api/server';
 
 const config = getConfig();
 
-initializeBot();
+// initializeBot();
 
 server.listen(config.server.port, () => {
   console.log(`Server listening on ${config.server.port}`);
