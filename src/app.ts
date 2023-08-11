@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-import { initializeBot } from './bot/initialize';
+// import { initializeBot } from './bot/initialize';
 import { getConfig } from './utils/config';
 import server from './api/server';
 
