@@ -38,9 +38,6 @@ jobs:
       - name: Run Unit Tests
         run: npm test
 
-      - name: Compile TypeScript
-        run: npm run build
-
   build:
     name: Build & Push Docker Image
     runs-on: ubuntu-22.04
