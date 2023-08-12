@@ -9,13 +9,18 @@ const getCatchAll = (req: Request, res: Response) => {
 };
 
 const postPlexWebHook = (req: Request, res: Response) => {
-  console.log('==== HEADER ====');
-  console.log(JSON.stringify(req.headers));
-  console.log('====BODY ====');
-  console.log(JSON.stringify(req.body));
-  console.log('====REQ ====');
-  console.log(JSON.stringify(req));
-  res.status(200).json({ message: 'ok' });
+  try {
+    console.log('==== HEADER ====');
+    console.log(JSON.stringify(req.headers));
+    console.log('====BODY ====');
+    console.log(JSON.stringify(req.body));
+    console.log('====REQ ====');
+    console.log(JSON.stringify(req));
+    res.status(200).json({ message: 'ok' });
+  } catch (error: any) {
+    console.log({ err: error.message, stack: error.stack });
+    res.status(500).send({ message: error.message });
+  }
 };
 
 export default {
