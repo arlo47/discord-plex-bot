@@ -5,6 +5,9 @@ export interface IProcessEnv {
   server: {
     port: number;
   };
+  plex: {
+    token: string;
+  };
 }
 
 declare global {
@@ -17,6 +20,9 @@ export const getConfig = (): IProcessEnv => {
   return {
     discord: {
       token: process.env.DISCORD_TOKEN ?? '',
+    },
+    plex: {
+      token: process.env.PLEX_AUTH_TOKEN ?? '',
     },
     server: {
       port: process.env.PORT ? Number(process.env.PORT) : 8080,
