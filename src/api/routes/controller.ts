@@ -13,9 +13,7 @@ const postPlexWebHook = (req: Request, res: Response) => {
     console.log('==== HEADER ====');
     console.log(JSON.stringify(req.headers));
     console.log('====BODY ====');
-    console.log(JSON.parse(req.body.payload));
-    console.log('====REQ ====');
-    console.log(JSON.stringify(req));
+    console.log(JSON.stringify(req.body.payload));
     res.status(200).json({ message: 'ok' });
   } catch (error: any) {
     console.log({ err: error.message, stack: error.stack });
