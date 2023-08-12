@@ -10,9 +10,11 @@ const getCatchAll = (req: Request, res: Response) => {
 
 const postPlexWebHook = (req: Request, res: Response) => {
   console.log('==== HEADER ====');
-  console.log(req.header);
+  console.log(JSON.stringify(req.headers));
   console.log('====BODY ====');
-  console.log(req.body);
+  console.log(JSON.stringify(req.body));
+  console.log('====REQ ====');
+  console.log(JSON.stringify(req));
   res.status(200).json({ message: 'ok' });
 };
 
