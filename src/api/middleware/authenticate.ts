@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { getConfig } from '../../utils/config';
+import { ResponseMessage } from '../../utils/constants';
 
 export const authenticate = (
   req: Request,
@@ -8,10 +9,10 @@ export const authenticate = (
 ) => {
   const config = getConfig();
 
-  const token = req.params.token;
+  const { token } = req.query;
 
   if (!token || token !== config.plex.token) {
-    return res.status(401).send({ message: 'unauthorized' });
+    return res.status(401).send({ message: ResponseMessage.Unauthorized });
   }
 
   next();
