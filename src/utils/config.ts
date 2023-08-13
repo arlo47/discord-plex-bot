@@ -1,6 +1,7 @@
 export interface IProcessEnv {
   discord: {
     token: string;
+    channelId: string;
   };
   server: {
     port: number;
@@ -20,6 +21,7 @@ export const getConfig = (): IProcessEnv => {
   return {
     discord: {
       token: process.env.DISCORD_TOKEN ?? '',
+      channelId: process.env.DISCORD_RATING_CHANNEL_ID ?? '',
     },
     plex: {
       token: process.env.PLEX_AUTH_TOKEN ?? '',

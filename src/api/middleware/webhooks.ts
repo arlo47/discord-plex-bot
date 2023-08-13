@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { ResponseMessage, PlexWebhookEvent } from '../../utils/constants';
+import { PlexRateEvent } from '../../types/plex';
 
 export const parseWebHook = (
   req: Request,
@@ -24,7 +25,7 @@ export const validateWebHookType = (
   res: Response,
   next: NextFunction,
 ) => {
-  const payload = req.body;
+  const payload: PlexRateEvent = req.body;
 
   if (payload.event !== PlexWebhookEvent.Rate) {
     return res.status(401).send({ message: ResponseMessage.GenericError });
