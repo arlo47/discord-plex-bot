@@ -1,20 +1,37 @@
-import { Channel, Client } from 'discord.js';
-import { PlexRateEvent } from '../../types/plex';
+import { Channel, Client, EmbedBuilder } from 'discord.js';
 import { getConfig } from '../../utils/config';
+import { PlexRating } from '../../models/PlexRating';
 
 export const name: string = 'mediaRate';
 
 export const once: boolean = false;
 
-export const execute = (client: Client, plexRating: PlexRateEvent) => {
-  console.log('Media Rate Hit!');
+export const execute = (client: Client, plexRating: PlexRating) => {
   const config = getConfig();
 
   const channel = client.channels.cache.find((c: Channel) => {
     return c.id === config.discord.channelId;
   });
 
+  const mediaRateEmbed = new EmbedBuilder()
+    .setColor(0x0099ff)
+    .setTitle(plexRating.title)
+    .setDescription(plexRating.summary)
+    .addFields(
+      {
+        name: 'User Rating',
+        value: String(plexRating.userRating),
+        inline: true,
+      },
+      {
+        name: 'Audience Rating',
+        value: String(plexRating.audienceRating),
+        inline: true,
+      },
+    )
+    .addFields({ name: 'Rating By', value: plexRating.accountName });
+
   if (channel?.isTextBased()) {
-    channel.send('Media Rate!');
+    channel.send({ embeds: [mediaRateEmbed] });
   }
 };
