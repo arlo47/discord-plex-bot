@@ -8,8 +8,7 @@ export const parseWebHook = (
   next: NextFunction,
 ) => {
   try {
-    const content = req.body.payload || req.body;
-    const payload = JSON.parse(JSON.parse(content));
+    const payload = req.body.payload || req.body;
 
     req.body = payload;
 
