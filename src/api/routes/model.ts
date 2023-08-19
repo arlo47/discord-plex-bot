@@ -13,6 +13,10 @@ export const processRatingWebHook = (payload: PlexRateEvent) => {
       payload.Metadata.summary,
       payload.Metadata.title,
     );
+
+    console.log('=== init PlexRating ===');
+    console.log(plexRating);
+
     const discordClient: Client = getClient();
     discordClient.emit('mediaRate', discordClient, plexRating);
     console.log(plexRating);

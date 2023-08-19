@@ -10,10 +10,12 @@ export const parseWebHook = (
   try {
     const content = req.body.payload || req.body;
 
+    console.log('=== pre parsing ===');
     console.log(content);
 
     const payload = JSON.parse(content);
 
+    console.log('=== post parsing ===');
     console.log(payload);
 
     req.body = payload;
@@ -33,7 +35,7 @@ export const validateWebHookType = (
   const payload: PlexRateEvent = req.body;
 
   if (payload.event !== PlexWebhookEvent.Rate) {
-    return res.status(401).send({ message: ResponseMessage.GenericError });
+    return res.status(400).send({ message: ResponseMessage.GenericError });
   }
 
   next();
