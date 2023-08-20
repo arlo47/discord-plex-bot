@@ -35,4 +35,6 @@ router.post(
 
 router.get('/*', controller.getCatchAll);
 
+console.log(router.stack);
+
 export default router;

@@ -1,3 +1,7 @@
+process.on('uncaughtException', (error: any) => {
+  console.log('Uncaught Exception!!', error.message, error.stack);
+});
+
 import * as dotenv from 'dotenv';
 dotenv.config();
 
