@@ -30,3 +30,9 @@ jobs:
 
       - name: Compile TypeScript
         run: npm run build
+
+      - name: Deploy
+        uses: digitalocean/app_action@v1.1.5
+        with:
+          app_name: discord-plex-bot-app
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
