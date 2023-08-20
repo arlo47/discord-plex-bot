@@ -1,6 +1,10 @@
 import { Channel, Client, EmbedBuilder } from 'discord.js';
 import { getConfig } from '../../utils/config';
 import { PlexRating } from '../../models/PlexRating';
+import {
+  formatUserRating,
+  formatAudienceRating,
+} from '../utils/ratingFormatter';
 
 export const name: string = 'mediaRate';
 
@@ -23,12 +27,12 @@ export const execute = (client: Client, plexRating: PlexRating) => {
     .addFields(
       {
         name: 'User Rating',
-        value: String(plexRating.userRating),
+        value: formatUserRating(plexRating.userRating),
         inline: true,
       },
       {
         name: 'Audience Rating',
-        value: String(plexRating.audienceRating),
+        value: formatAudienceRating(plexRating.audienceRating),
         inline: true,
       },
     )

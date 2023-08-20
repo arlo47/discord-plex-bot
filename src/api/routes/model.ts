@@ -3,12 +3,15 @@ import { PlexRateEvent } from '../../types/plex';
 import { getClient } from '../../bot/initialize';
 import { Client } from 'discord.js';
 
-export const processRatingWebHook = (payload: PlexRateEvent) => {
+export const processRatingWebHook = (
+  payload: PlexRateEvent,
+  name: string | undefined,
+) => {
   try {
     const plexRating = new PlexRating(
       payload.Metadata.userRating,
       payload.Metadata.audienceRating,
-      payload.Account.title,
+      name ?? payload.Account.title,
       payload.Metadata.tagline,
       payload.Metadata.summary,
       payload.Metadata.title,

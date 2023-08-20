@@ -14,7 +14,9 @@ const getCatchAll = (req: Request, res: Response) => {
 const postPlexWebHook = (req: Request, res: Response) => {
   try {
     const payload: PlexRateEvent = req.body;
-    processRatingWebHook(payload);
+    const name = req.query.name as unknown as string | undefined;
+
+    processRatingWebHook(payload, name);
 
     res.status(200).json({ message: ResponseMessage.Success });
   } catch (error: any) {

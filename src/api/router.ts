@@ -2,7 +2,11 @@ import { Router } from 'express';
 import controller from './routes/controller';
 import multer, { FileFilterCallback, Multer } from 'multer';
 import { authenticate } from './middleware/authenticate';
-import { parseWebHook, validateWebHookType } from './middleware/webhooks';
+import {
+  parseWebHook,
+  validateWebHookType,
+  validateName,
+} from './middleware/webhooks';
 
 const router = Router();
 
@@ -19,7 +23,13 @@ router.get('/', controller.getRoot);
 
 router.post(
   '/webhook',
-  [upload.single('thumb'), authenticate, parseWebHook, validateWebHookType],
+  [
+    upload.single('thumb'),
+    authenticate,
+    parseWebHook,
+    validateWebHookType,
+    validateName,
+  ],
   controller.postPlexWebHook,
 );
 

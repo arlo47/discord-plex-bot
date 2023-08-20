@@ -27,6 +27,20 @@ export const parseWebHook = (
   }
 };
 
+export const validateName = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  const { name } = req.query;
+
+  if (typeof name !== 'string' && typeof name !== 'undefined') {
+    return res.status(400).send({ message: ResponseMessage.GenericError });
+  }
+
+  next();
+};
+
 export const validateWebHookType = (
   req: Request,
   res: Response,
