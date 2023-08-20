@@ -8,8 +8,10 @@ const getRoot = (req: Request, res: Response) => {
   res.status(200).json({ message: ResponseMessage.Success });
 };
 
-const getCatchAll = (req: Request, res: Response) => {
-  console.log('getCatchAll endpoint hit');
+const catchAllNotFound = (req: Request, res: Response) => {
+  console.log(
+    `${req.method} ${req.protocol}://${req.hostname}${req.originalUrl} Not Found`,
+  );
   res.status(404).json({ message: ResponseMessage.NotFound });
 };
 
@@ -32,5 +34,5 @@ const postPlexWebHook = (req: Request, res: Response) => {
 export default {
   getRoot,
   postPlexWebHook,
-  getCatchAll,
+  catchAllNotFound,
 };

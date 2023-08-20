@@ -33,8 +33,7 @@ router.post(
   controller.postPlexWebHook,
 );
 
-router.get('/*', controller.getCatchAll);
-
-console.log(router.stack);
+router.get('/*', controller.catchAllNotFound);
+router.post('/*', controller.catchAllNotFound);
 
 export default router;
