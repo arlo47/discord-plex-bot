@@ -4,14 +4,18 @@ import { processRatingWebHook } from './model';
 import { PlexRateEvent } from '../../types/plex';
 
 const getRoot = (req: Request, res: Response) => {
+  console.log('getRoot endpoint hit');
   res.status(200).json({ message: ResponseMessage.Success });
 };
 
 const getCatchAll = (req: Request, res: Response) => {
+  console.log('getCatchAll endpoint hit');
   res.status(404).json({ message: ResponseMessage.NotFound });
 };
 
 const postPlexWebHook = (req: Request, res: Response) => {
+  console.log('postPlexWebHook endpoint hit');
+
   try {
     const payload: PlexRateEvent = req.body;
     const name = req.query.name as unknown as string | undefined;
