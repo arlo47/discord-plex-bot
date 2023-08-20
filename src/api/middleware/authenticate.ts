@@ -7,13 +7,23 @@ export const authenticate = (
   res: Response,
   next: NextFunction,
 ) => {
-  const config = getConfig();
+  try {
+    const config = getConfig();
 
-  const { token } = req.query;
+    const { token } = req.query;
+    const tokens = config.plex.tokens;
 
-  if (!token || token !== config.plex.token) {
-    return res.status(401).send({ message: ResponseMessage.Unauthorized });
+    const validToken = tokens.find((t) => {
+      return t === token;
+    });
+
+    if (!validToken) {
+      return res.status(401).send({ message: ResponseMessage.Unauthorized });
+    }
+
+    next();
+  } catch (error: any) {
+    console.log({ err: error.message, stack: error.stack });
+    return res.status(500).send({ message: ResponseMessage.GenericError });
   }
-
-  next();
 };
