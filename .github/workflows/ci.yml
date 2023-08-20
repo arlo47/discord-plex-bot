@@ -3,7 +3,7 @@ run-name: Build & Test
 on: [push]
 
 jobs:
-  check:
+  build:
     name: Build & Test
     runs-on: ubuntu-22.04
 
@@ -31,7 +31,14 @@ jobs:
       - name: Compile TypeScript
         run: npm run build
 
-      - name: Deploy
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-22.04
+    needs: build
+    if: success() && github.ref == 'refs/heads/master'
+
+    steps:
+      - name: Deploy To DigitalOcean
         uses: digitalocean/app_action@v1.1.5
         with:
           app_name: discord-plex-bot-app
