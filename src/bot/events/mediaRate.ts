@@ -17,9 +17,6 @@ export const execute = (client: Client, plexRating: PlexRating) => {
     return c.id === config.discord.channelId;
   });
 
-  console.log('=== in event ===');
-  console.log(channel);
-
   const mediaRateEmbed = new EmbedBuilder()
     .setColor(0x0099ff)
     .setTitle(plexRating.title)

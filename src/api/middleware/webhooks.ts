@@ -9,14 +9,7 @@ export const parseWebHook = (
 ) => {
   try {
     const content = req.body.payload || req.body;
-
-    console.log('=== pre parsing ===');
-    console.log(content);
-
     const payload = JSON.parse(content);
-
-    console.log('=== post parsing ===');
-    console.log(payload);
 
     req.body = payload;
 

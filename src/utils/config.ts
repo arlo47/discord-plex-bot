@@ -7,7 +7,7 @@ export interface IProcessEnv {
     port: number;
   };
   plex: {
-    tokens: string[];
+    token: string;
   };
 }
 
@@ -24,7 +24,7 @@ export const getConfig = (): IProcessEnv => {
       channelId: process.env.DISCORD_RATING_CHANNEL_ID ?? '',
     },
     plex: {
-      tokens: process.env.PLEX_AUTH_TOKENS?.split(', ') ?? [],
+      token: process.env.PLEX_AUTH_TOKEN ?? '',
     },
     server: {
       port: process.env.PORT ? Number(process.env.PORT) : 8080,

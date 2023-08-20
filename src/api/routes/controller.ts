@@ -9,9 +9,8 @@ const getRoot = (req: Request, res: Response) => {
 };
 
 const catchAllNotFound = (req: Request, res: Response) => {
-  console.log(
-    `${req.method} ${req.protocol}://${req.hostname}${req.originalUrl} Not Found`,
-  );
+  console.log('catchAllNotFound endpoint hit');
+
   res.status(404).json({ message: ResponseMessage.NotFound });
 };
 

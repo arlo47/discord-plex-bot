@@ -9,15 +9,9 @@ export const authenticate = (
 ) => {
   const config = getConfig();
 
-  const tokens = config.plex.tokens;
-
   const { token } = req.query;
 
-  const foundToken = tokens.find((t) => {
-    return t === token;
-  });
-
-  if (!foundToken) {
+  if (!token || token !== config.plex.token) {
     return res.status(401).send({ message: ResponseMessage.Unauthorized });
   }
 
