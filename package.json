@@ -13,7 +13,8 @@
     "build:compile": "tsc",
     "build": "npm run build:clean && npm run build:compile",
     "lint:check": "npx eslint .",
-    "format:check": "npx prettier ."
+    "format:check": "npx prettier .",
+    "prepare": "husky install"
   },
   "keywords": [
     "discord",
