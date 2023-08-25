@@ -1,0 +1,5 @@
+{
+  "lint-staged": {
+      "*": "concurrently npm:lint:check && npm:format:check"
+    }
+}

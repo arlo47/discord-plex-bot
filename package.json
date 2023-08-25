@@ -63,9 +63,6 @@
         "pre-commit": "npx lint-staged"
       }
     },
-    "lint-staged": {
-      "*.ts": "npx prettier --write"
-    },
     "verbose": true,
     "testEnvironment": "node",
     "modulePathIgnorePatterns": [
