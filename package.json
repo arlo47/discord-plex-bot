@@ -15,6 +15,7 @@
     "lint:check": "npx eslint .",
     "format:check": "npx prettier .",
     "lint:staged": "lint-staged",
+    "pre-commit": "npm run lint-staged && npm run test",
     "prepare": "husky install"
   },
   "keywords": [
@@ -58,11 +59,6 @@
     "testTimeout": 5000,
     "transform": {
       "^.+\\.(ts|tsx)$": "ts-jest"
-    },
-    "husky": {
-      "hooks": {
-        "pre-commit": "npm run lint:staged"
-      }
     },
     "verbose": true,
     "testEnvironment": "node",
