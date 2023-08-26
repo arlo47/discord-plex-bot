@@ -14,6 +14,7 @@
     "build": "npm run build:clean && npm run build:compile",
     "lint:check": "npx eslint .",
     "format:check": "npx prettier .",
+    "lint:staged": "lint-staged",
     "prepare": "husky install"
   },
   "keywords": [
@@ -60,7 +61,7 @@
     },
     "husky": {
       "hooks": {
-        "pre-commit": "lint-staged"
+        "pre-commit": "npm run lint:staged"
       }
     },
     "verbose": true,
