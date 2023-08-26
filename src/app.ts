@@ -13,8 +13,6 @@ const config = getConfig();
 
 initializeBot();
 
-console.log('hello world');
-
 server.listen(config.server.port, () => {
   console.log(`Server listening on ${config.server.port}`);
 });

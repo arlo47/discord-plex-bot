@@ -1,5 +1,3 @@
 {
-  "lint-staged": {
-      "*": "concurrently npm:lint:check && npm:format:check"
-    }
+  "*.ts": ["npm run lint:check", "npm run format:check"]
 }
