@@ -17,6 +17,7 @@
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "@typescript-eslint/no-namespace": "off",
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-console": "error"
   }
 }
