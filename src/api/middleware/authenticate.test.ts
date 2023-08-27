@@ -2,7 +2,7 @@ import { authenticate } from './authenticate';
 import { getMockReq, getMockRes } from '@jest-mock/express';
 
 describe('Authentication Middleware', () => {
-  it('Should Return Unauthorized If Token Not Included', () => {
+  it('Should Return 401 If Token Not Included', () => {
     const req = getMockReq();
     const { res, next } = getMockRes();
 
@@ -11,7 +11,7 @@ describe('Authentication Middleware', () => {
     expect(res.status).toHaveBeenCalledWith(401);
   });
 
-  it('Should Return Unauthorized If Token Is Not Valid', () => {
+  it('Should Return 401 If Token Is Not Valid', () => {
     const req = getMockReq({ query: { token: 'TEST' } });
     const { res, next } = getMockRes();
 
