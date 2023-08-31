@@ -17,6 +17,7 @@ A discord bot that consumes plex web hooks and posts them on discord
 
 ## TODO
 
+- move rating formating into PlexRating class
 - improve deployment process with doctl
 - tests for bot module
 - send webhook image in AttachmentBuilder
