@@ -3,8 +3,8 @@ run-name: Build & Test
 on: [push]
 
 env:
-  REGISTRY: https://registry.digitalocean.com/discord-plex-bot-image
-  IMAGE_NAME: discord-plex-bot-image
+  REGISTRY: 'https://registry.digitalocean.com/discord-plex-bot-image'
+  IMAGE_NAME: 'discord-plex-bot-image'
 
 jobs:
   build:
