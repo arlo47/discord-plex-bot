@@ -1,0 +1,59 @@
+name: discord-plex-bot-ci
+run-name: Build & Test
+on: [push]
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Branch
+        uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Formatter
+        run: npm run format:check
+
+      - name: Run Linter
+        run: npm run lint:check
+
+      - name: Run Unit Tests
+        run: npm test
+
+      - name: Compile TypeScript
+        run: npm run build
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-22.04
+    needs: build
+    if: success() && github.ref == 'refs/heads/master'
+
+    steps:
+      - name: Checkout Branch
+        uses: actions/checkout@v3
+
+      - name: Build Image
+        run: docker build -t discord-plex-bot-image .
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Login to DOCR
+        run: doctl registry login --expiry-seconds 600
+
+      - name: Tag Image
+        run: docker tag next registry.digitalocean.com/discord-plex-bot-image:next
+
+      - name: Push Image To DOCR
+        run: docker push registry.digitalocean.com/discord-plex-bot-image:next
