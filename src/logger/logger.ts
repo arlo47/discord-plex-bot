@@ -2,14 +2,13 @@ import winston from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 import path from 'path';
 import os from 'os';
-import { getConfig } from '../utils/config';
 
 export const logger = winston.createLogger({
   level: 'info',
   format: winston.format.json(),
   defaultMeta: {
     platform: os.platform(),
-    environment: getConfig().server.environment,
+    environment: process.env.SERVER_ENVIRONMENT,
   },
   transports: [
     new DailyRotateFile({
