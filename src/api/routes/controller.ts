@@ -2,9 +2,10 @@ import { Request, Response } from 'express';
 import { ResponseMessage } from '../../utils/constants';
 import { processRatingWebHook } from './model';
 import { PlexRateEvent } from '../../types/plex';
+import { logger } from '../../logger/logger';
 
 const getRoot = (req: Request, res: Response) => {
-  console.log('getRoot endpoint hit');
+  logger.info('hello from logger');
   res.status(200).json({ message: ResponseMessage.Success });
 };
 
