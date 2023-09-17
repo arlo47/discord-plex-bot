@@ -5,7 +5,7 @@ import { PlexRateEvent } from '../../types/plex';
 import { logger } from '../../logger/logger';
 
 const getRoot = (req: Request, res: Response) => {
-  logger.info('hello from logger');
+  logger.info('hello from logger!!');
   res.status(200).json({ message: ResponseMessage.Success });
 };
 
