@@ -1,6 +1,6 @@
 import { logger } from './logger/logger';
 
-process.on('uncaughtException', (error: NodeJS.ErrnoException) => {
+process.on('uncaughtException', (error: Error) => {
   console.log('Uncaught Exception!!', error.message, error.stack);
   logger.error({
     message: 'Uncaught Execption!!',

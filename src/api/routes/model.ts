@@ -3,6 +3,7 @@ import { PlexRateEvent } from '../../types/plex';
 import { getClient } from '../../bot/initialize';
 import { Client } from 'discord.js';
 import { Logger } from 'winston';
+import { ensureError } from '../../utils/error';
 
 export const processRatingWebHook = (
   logger: Logger,
@@ -21,11 +22,12 @@ export const processRatingWebHook = (
 
     const discordClient: Client = getClient();
     discordClient.emit('mediaRate', logger, discordClient, plexRating);
-  } catch (error: any) {
+  } catch (err: unknown) {
+    const error: Error = ensureError(err);
     logger.error({
       message: 'Error in processRatingWebHook',
       error: { err: error.message, stack: error.stack },
     });
-    throw Error(error);
+    throw error;
   }
 };
