@@ -16,8 +16,9 @@ const postPlexWebHook = (req: Request, res: Response) => {
   try {
     const payload: PlexRateEvent = req.body;
     const name = req.query.name as unknown as string | undefined;
+    const image = req.file;
 
-    processRatingWebHook(req.logger, payload, name);
+    processRatingWebHook(req.logger, payload, name, image);
 
     res.status(200).json({ message: ResponseMessage.Success });
   } catch (err: unknown) {

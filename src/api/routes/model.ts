@@ -9,6 +9,7 @@ export const processRatingWebHook = (
   logger: Logger,
   payload: PlexRateEvent,
   name: string | undefined,
+  image: any,
 ) => {
   try {
     const plexRating = new PlexRating(
@@ -18,6 +19,7 @@ export const processRatingWebHook = (
       payload.Metadata.tagline,
       payload.Metadata.summary,
       payload.Metadata.title,
+      image,
     );
 
     const discordClient: Client = getClient();

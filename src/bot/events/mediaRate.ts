@@ -1,4 +1,4 @@
-import { Channel, Client, EmbedBuilder } from 'discord.js';
+import { AttachmentBuilder, Channel, Client, EmbedBuilder } from 'discord.js';
 import { getConfig } from '../../utils/config';
 import { PlexRating } from '../../models/PlexRating';
 import {
@@ -35,6 +35,10 @@ export const execute = (
       },
     });
 
+    const attachment = new AttachmentBuilder(
+      Buffer.from(plexRating.thumbnail?.buffer),
+    );
+
     const mediaRateEmbed = new EmbedBuilder()
       .setColor(0x0099ff)
       .setTitle(plexRating.title)
@@ -51,10 +55,11 @@ export const execute = (
           inline: true,
         },
       )
-      .addFields({ name: 'Rating By', value: plexRating.accountName });
+      .addFields({ name: 'Rating By', value: plexRating.accountName })
+      .setImage(`attachment://${plexRating.thumbnail?.originalName}`);
 
     if (channel?.isTextBased()) {
-      channel.send({ embeds: [mediaRateEmbed] });
+      channel.send({ embeds: [mediaRateEmbed], files: [attachment] });
     }
   } catch (err: unknown) {
     const error: Error = ensureError(err);
@@ -62,5 +67,6 @@ export const execute = (
       message: 'Error Emitting Rating Event',
       error: { err: error.message, stack: error.stack },
     });
+    throw error;
   }
 };
