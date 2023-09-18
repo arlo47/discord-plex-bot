@@ -8,7 +8,7 @@ export const ensureError = (value: unknown): Error => {
   try {
     stringifiedValue = JSON.stringify(value);
   } catch {
-    stringifiedValue = 'Unable to stringify thrown value.';
+    stringifiedValue = '[Unable to stringify thrown value.]';
   }
 
   return new Error(`Value thrown was not an error: ${stringifiedValue}`);
