@@ -5,6 +5,7 @@ export interface IProcessEnv {
   };
   server: {
     port: number;
+    environment: string;
   };
   plex: {
     tokens: string[];
@@ -30,6 +31,7 @@ export const getConfig = (): IProcessEnv => {
     },
     server: {
       port: process.env.PORT ? Number(process.env.PORT) : 8080,
+      environment: process.env.SERVER_ENVRIONMENT ?? 'UNKNOWN',
     },
   };
 };

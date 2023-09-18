@@ -4,6 +4,7 @@
     "module": "commonjs",
     "rootDir": "./src",
     "types": ["jest", "node"],
+    "typeRoots": ["./src/types", "./node_modules/@types"],
     "allowJs": true,
     "sourceMap": true,
     "outDir": "./dist",

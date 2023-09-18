@@ -2,16 +2,13 @@
   "version": "1.0.0",
   "configurations": [
     {
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "name": "Attach Debugger",
-      "restart": true,
-      "request": "launch",
-      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/ts-node-dev",
-      "skipFiles": ["<node_internals>/**"],
       "type": "node",
-      "runtimeArgs": ["--respawn"],
-      "args": ["${workspaceFolder}/src/app.ts"]
+      "console": "integratedTerminal",
+      "request": "launch",
+      "name": "Attach Debugger",
+      "program": "${workspaceFolder}/src/app.ts",
+      "preLaunchTask": "tsc: build - tsconfig.json",
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"]
     }
   ]
 }

@@ -18,12 +18,16 @@ export const authenticate = (
     });
 
     if (!validToken) {
+      req.logger.warn({ message: 'Unauthorized' });
       return res.status(401).send({ message: ResponseMessage.Unauthorized });
     }
 
     next();
   } catch (error: any) {
-    console.log({ err: error.message, stack: error.stack });
+    req.logger.error({
+      message: 'Error in authenticate middleware',
+      error: { err: error.message, stack: error.stack },
+    });
     return res.status(500).send({ message: ResponseMessage.GenericError });
   }
 };
