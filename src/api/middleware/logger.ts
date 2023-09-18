@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import dayjs from 'dayjs';
 import { logger } from '../../logger/logger';
 
-export const initRequestLogger = (
+export const connectApiLogger = (
   req: Request,
   res: Response,
   next: NextFunction,

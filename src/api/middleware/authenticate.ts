@@ -18,6 +18,7 @@ export const authenticate = (
     });
 
     if (!validToken) {
+      req.logger.warn({ message: 'Unauthorized' });
       return res.status(401).send({ message: ResponseMessage.Unauthorized });
     }
 
