@@ -1,14 +1,15 @@
-import winston from 'winston';
+import winston, { format } from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 import path from 'path';
 import os from 'os';
 
+const { json, timestamp, prettyPrint } = format;
+
 export const logger = winston.createLogger({
   level: 'info',
-  format: winston.format.json(),
+  format: format.combine(json(), timestamp(), prettyPrint()),
   defaultMeta: {
     platform: os.platform(),
-    environment: process.env.SERVER_ENVIRONMENT,
   },
   transports: [
     new DailyRotateFile({

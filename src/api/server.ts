@@ -1,11 +1,11 @@
 import express, { Application, json } from 'express';
 import router from './router';
-import { attachApiLogger } from './middleware/apiLogger';
+import { initRequestLogger } from './middleware/logger';
 
 const server: Application = express();
 
 server.use(json());
-server.use(attachApiLogger);
+server.use(initRequestLogger);
 server.use('/', router);
 
 export default server;
