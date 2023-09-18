@@ -1,16 +1,12 @@
 import winston, { format } from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 import path from 'path';
-import os from 'os';
 
 const { json, timestamp, prettyPrint } = format;
 
 export const logger = winston.createLogger({
   level: 'info',
   format: format.combine(json(), timestamp(), prettyPrint()),
-  defaultMeta: {
-    platform: os.platform(),
-  },
   transports: [
     new DailyRotateFile({
       filename: path.join(__dirname, '/logs/bot-%DATE%.log'),

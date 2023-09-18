@@ -22,15 +22,15 @@ export const initRequestLogger = (
   });
   req.logger = childLogger;
 
-  logger.info({ message: 'Start HTTP Request' });
+  req.logger.info({ message: 'Start HTTP Request' });
 
   const destroyLogger = () => {
     const endTime = dayjs().toISOString();
-    const duration = dayjs(endTime).diff(dayjs(startTime), 'millisecond');
+    const duration = dayjs(endTime).diff(dayjs(startTime), 'milliseconds');
 
     req.logger.info({
       message: 'HTTP Request Complete',
-      duration,
+      duration: `${duration}ms`,
     });
 
     res.removeListener('finish', destroyLogger);
