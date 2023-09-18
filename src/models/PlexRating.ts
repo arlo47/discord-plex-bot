@@ -1,4 +1,4 @@
-import { PlexThumbnail } from './PlexThumnail';
+import { PlexThumbnail } from './PlexThumbnail';
 
 export class PlexRating {
   public thumbnail: PlexThumbnail;
