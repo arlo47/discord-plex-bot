@@ -40,7 +40,6 @@ export const initializeBot = () => {
     });
 
     client.login(config.discord.token);
-    logger.info({ message: 'Bot Initialized' });
   } catch (error: any) {
     logger.error({
       message: 'Bot Failed To Initialized',

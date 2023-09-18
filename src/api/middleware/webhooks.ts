@@ -15,7 +15,10 @@ export const parseWebHook = (
 
     next();
   } catch (error: any) {
-    console.log({ err: error.message, stack: error.stack });
+    req.logger.error({
+      message: 'Error in parseWebhook middleware',
+      error: { err: error.message, stack: error.stack },
+    });
     res.status(500).send({ message: ResponseMessage.GenericError });
   }
 };

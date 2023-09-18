@@ -1,11 +1,11 @@
 import { logger } from './logger/logger';
 
 process.on('uncaughtException', (error: NodeJS.ErrnoException) => {
+  console.log('Uncaught Exception!!', error.message, error.stack);
   logger.error({
-    message: 'Uncaught Execption!',
+    message: 'Uncaught Execption!!',
     error: { message: error.message, stack: error.stack },
   });
-  console.log('Uncaught Exception!!', error.message, error.stack);
 });
 
 import * as dotenv from 'dotenv';
