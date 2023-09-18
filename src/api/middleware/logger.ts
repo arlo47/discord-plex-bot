@@ -12,6 +12,11 @@ export const initRequestLogger = (
 
   const childLogger = logger.child({
     eventId: uuidv4(),
+  });
+  req.logger = childLogger;
+
+  req.logger.info({
+    message: 'Start HTTP Request',
     request: {
       host: req.hostname,
       url: req.url,
@@ -20,9 +25,6 @@ export const initRequestLogger = (
       body: req.body,
     },
   });
-  req.logger = childLogger;
-
-  req.logger.info({ message: 'Start HTTP Request' });
 
   const destroyLogger = () => {
     const endTime = dayjs().toISOString();
@@ -30,6 +32,7 @@ export const initRequestLogger = (
 
     req.logger.info({
       message: 'HTTP Request Complete',
+      response: { statusCode: res.statusCode },
       duration: `${duration}ms`,
     });
 

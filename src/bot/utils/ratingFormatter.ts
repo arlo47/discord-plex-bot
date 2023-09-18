@@ -4,13 +4,8 @@
  * userRating into the float of star rating
  */
 export const formatUserRating = (userRating: number): string => {
-  try {
-    const starRating = userRating / 2;
-    return `${starRating} stars`;
-  } catch (error: any) {
-    console.log({ error: error.message, stack: error.stack });
-    throw Error(error);
-  }
+  const starRating = userRating / 2;
+  return `${starRating} stars`;
 };
 
 /**
@@ -18,11 +13,6 @@ export const formatUserRating = (userRating: number): string => {
  * Converts audienceRating to a percentage.
  */
 export const formatAudienceRating = (audienceRating: number): string => {
-  try {
-    const percentageRating = audienceRating * 10;
-    return `${percentageRating}%`;
-  } catch (error: any) {
-    console.log({ error: error.message, stack: error.stack });
-    throw Error(error);
-  }
+  const percentageRating = audienceRating * 10;
+  return `${percentageRating}%`;
 };
