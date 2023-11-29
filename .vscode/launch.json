@@ -7,7 +7,7 @@
       "request": "launch",
       "name": "Attach Debugger",
       "program": "${workspaceFolder}/src/app.ts",
-      "preLaunchTask": "tsc: build - tsconfig.json",
+      "preLaunchTask": "tsc: build - src/tsconfig.build.json",
       "outFiles": ["${workspaceFolder}/dist/**/*.js"]
     }
   ]
