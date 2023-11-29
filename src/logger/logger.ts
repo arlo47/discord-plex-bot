@@ -4,9 +4,14 @@ import path from 'path';
 
 const { json, timestamp, prettyPrint } = format;
 
+const redactSecrets: winston.Logform.FormatWrap = format((info) => {
+  info.eventId = '[REDACTED]';
+  return info;
+});
+
 export const logger = winston.createLogger({
   level: 'info',
-  format: format.combine(json(), timestamp(), prettyPrint()),
+  format: format.combine(json(), redactSecrets(), timestamp(), prettyPrint()),
   transports: [
     new DailyRotateFile({
       filename: path.join(__dirname, '/logs/bot-%DATE%.log'),

@@ -1,4 +1,4 @@
-import { request } from '../../../utils/setup/mockApiServerSetup';
+import { request } from '../../../setup';
 
 describe('Testing API', () => {
   it('Should return 200 when calling root', async () => {
