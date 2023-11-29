@@ -1,5 +1,5 @@
-describe('Testing The Test Suite', () => {
-  it('Should Do Basic Math', () => {
+describe('Sanity Check', () => {
+  it('Should do basic math', () => {
     expect(1 + 1).toBe(2);
   });
 });

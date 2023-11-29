@@ -1,6 +1,5 @@
 node_modules/
 dist/
 .env
-fixtures/
 coverage/
 src/logger/logs/
