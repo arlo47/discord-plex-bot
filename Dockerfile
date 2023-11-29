@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . .
 RUN npm install husky -g
 RUN npm install
-RUN npx tsc
+RUN npx tsc -p src/tsconfig.build.json
 
 FROM node:18-alpine AS final
 WORKDIR /app

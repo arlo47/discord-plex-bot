@@ -1,5 +1,9 @@
 import { getMockReq, getMockRes } from '@jest-mock/express';
-import { parseWebHook, validateName, validateWebHookType } from './webhooks';
+import {
+  parseWebHook,
+  validateName,
+  validateWebHookType,
+} from '../../../../src/api/middleware/webhooks';
 
 describe('Webhooks Middleware', () => {
   describe('validateName', () => {
