@@ -1,5 +1,5 @@
 import winston from 'winston';
-import { logger } from '../../../src/logger/logger';
+import { logger } from '../../../../src/logger/logger';
 import { MemoryTransport, logs } from '../../utils/logger/MemoryTransport';
 import dayjs from 'dayjs';
 

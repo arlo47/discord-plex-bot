@@ -3,7 +3,7 @@ import {
   parseWebHook,
   validateName,
   validateWebHookType,
-} from '../../../../src/api/middleware/webhooks';
+} from '../../../../../src/api/middleware/webhooks';
 
 describe('Webhooks Middleware', () => {
   describe('validateName', () => {

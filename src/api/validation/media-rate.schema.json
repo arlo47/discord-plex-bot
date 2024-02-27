@@ -1,0 +1,133 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "rating": { "type": "number" },
+    "event": { "type": "string" },
+    "user": { "type": "boolean" },
+    "owner": { "type": "boolean" },
+    "Account": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "number" },
+        "thumb": { "type": "string", "format": "uri" },
+        "title": { "type": "string" }
+      },
+      "required": ["id", "thumb", "title"]
+    },
+    "Server": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "uuid": { "type": "string" }
+      },
+      "required": ["title"]
+    },
+    "Metadata": {
+      "type": "object",
+      "properties": {
+        "librarySectionType": { "type": "string" },
+        "ratingKey": { "type": "string" },
+        "key": { "type": "string" },
+        "guid": { "type": "string" },
+        "studio": { "type": "string" },
+        "type": { "type": "string" },
+        "title": { "type": "string" },
+        "librarySectionTitle": { "type": "string" },
+        "librarySectionID": { "type": "number" },
+        "librarySectionKey": { "type": "string" },
+        "contentRating": { "type": "string" },
+        "summary": { "type": "string" },
+        "index": { "type": "number" },
+        "audienceRating": { "type": "number" },
+        "userRating": { "type": "number" },
+        "viewCount": { "type": "number" },
+        "skipCount": { "type": "number" },
+        "lastViewedAt": { "type": "number" },
+        "lastRatedAt": { "type": "number" },
+        "year": { "type": "number" },
+        "tagline": { "type": "string" },
+        "thumb": { "type": "string" },
+        "art": { "type": "string" },
+        "theme": { "type": "string" },
+        "duration": { "type": "number" },
+        "originallyAvailableAt": { "type": "string", "format": "date" },
+        "leafCount": { "type": "number" },
+        "viewedLeafCount": { "type": "number" },
+        "childCount": { "type": "number" },
+        "addedAt": { "type": "number" },
+        "updatedAt": { "type": "number" },
+        "audienceRatingImage": { "type": "string" },
+        "primaryExtraKey": { "type": "string" },
+        "Genre": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "number" },
+              "filter": { "type": "string" },
+              "tag": { "type": "string" }
+            },
+            "required": ["id", "filter", "tag"]
+          }
+        },
+        "Country": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "number" },
+              "filter": { "type": "string" },
+              "tag": { "type": "string" }
+            },
+            "required": ["id", "filter", "tag"]
+          }
+        },
+        "Guid": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" }
+            },
+            "required": ["id"]
+          }
+        },
+        "Rating": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "image": { "type": "string" },
+              "value": { "type": "number" },
+              "type": { "type": "string" }
+            },
+            "required": ["image", "value", "type"]
+          }
+        }
+      },
+      "required": [
+        "title",
+        "summary",
+        "audienceRating",
+        "userRating",
+        "year",
+        "tagline",
+        "audienceRatingImage",
+        "Genre",
+        "Rating"
+      ],
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "rating",
+    "event",
+    "user",
+    "owner",
+    "Account",
+    "Server",
+    "Player",
+    "Metadata"
+  ]
+}
