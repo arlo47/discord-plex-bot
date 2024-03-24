@@ -1,3 +1,4 @@
+import { FilePayload } from '../types/express';
 import { PlexThumbnail } from './PlexThumbnail';
 
 export class PlexRating {
@@ -10,7 +11,7 @@ export class PlexRating {
     public tagline: string,
     public summary: string,
     public title: string,
-    image: any,
+    image: FilePayload | undefined,
   ) {
     if (image) {
       this.thumbnail = new PlexThumbnail(

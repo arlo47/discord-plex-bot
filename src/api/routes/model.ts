@@ -4,12 +4,13 @@ import { getClient } from '../../bot/initialize';
 import { Client } from 'discord.js';
 import { Logger } from 'winston';
 import { ensureError } from '../../utils/error';
+import { FilePayload } from '../../types/express';
 
 export const processRatingWebHook = (
   logger: Logger,
   payload: PlexRateEvent,
   name: string | undefined,
-  image: any,
+  image: FilePayload | undefined,
 ) => {
   try {
     const plexRating = new PlexRating(

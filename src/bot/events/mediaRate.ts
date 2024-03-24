@@ -57,12 +57,12 @@ export const execute = (
     if (channel?.isTextBased()) {
       channel.send({
         embeds: [mediaRateEmbed],
-        files: [
-          {
-            attachment: plexRating.thumbnail?.buffer,
-            name: plexRating.thumbnail?.originalName,
-          },
-        ],
+        // files: [
+        //   {
+        //     attachment: plexRating.thumbnail?.buffer,
+        //     name: plexRating.thumbnail?.originalName,
+        //   },
+        // ],
       });
     }
   } catch (err: unknown) {
