@@ -1,0 +1,115 @@
+{
+  "event": "media.pause",
+  "user": true,
+  "owner": true,
+  "Account": {
+    "id": 1234567,
+    "thumb": "https://plex.tv/users/123456/avatar?c=123456",
+    "title": "TEST"
+  },
+  "Server": {
+    "title": "MEDIA",
+    "uuid": "TEST"
+  },
+  "Player": {
+    "local": true,
+    "publicAddress": "1234.1234.1234",
+    "title": "Firefox",
+    "uuid": "123456"
+  },
+  "Metadata": {
+    "librarySectionType": "show",
+    "ratingKey": "6014",
+    "key": "/library/metadata/6014",
+    "parentRatingKey": "6011",
+    "grandparentRatingKey": "5889",
+    "guid": "plex://episode/5d9c13ebef619b00204aa329",
+    "parentGuid": "plex://season/602e69f4c96042002d087f15",
+    "grandparentGuid": "plex://show/5d9c0875170e24001f2ab27e",
+    "type": "episode",
+    "title": "Old Lady House: A Situation Comedy",
+    "grandparentKey": "/library/metadata/5889",
+    "parentKey": "/library/metadata/6011",
+    "librarySectionTitle": "TV Shows",
+    "librarySectionID": 4,
+    "librarySectionKey": "/library/sections/4",
+    "grandparentTitle": "It's Always Sunny in Philadelphia",
+    "parentTitle": "Season 12",
+    "contentRating": "TV-MA",
+    "summary": "Charlie thinks Mac's mom is holding his mom hostage so the gang installs spy cameras in their house. They discover the moms are quite entertaining once Dennis makes edits to the footage.",
+    "index": 3,
+    "parentIndex": 12,
+    "audienceRating": 7.6,
+    "viewOffset": 459000,
+    "lastViewedAt": 1691863496,
+    "thumb": "/library/metadata/6014/thumb/1647131405",
+    "art": "/library/metadata/5889/art/1690530384",
+    "parentThumb": "/library/metadata/6011/thumb/1647131400",
+    "grandparentThumb": "/library/metadata/5889/thumb/1690530384",
+    "grandparentArt": "/library/metadata/5889/art/1690530384",
+    "grandparentTheme": "/library/metadata/5889/theme/1690530384",
+    "duration": 1500000,
+    "originallyAvailableAt": "2017-01-18",
+    "addedAt": 1647131258,
+    "updatedAt": 1647131405,
+    "audienceRatingImage": "themoviedb://image.rating",
+    "Guid": [
+      { "id": "imdb://tt4463998" },
+      { "id": "tmdb://1251893" },
+      { "id": "tvdb://5871910" }
+    ],
+    "Rating": [
+      { "image": "themoviedb://image.rating", "value": 7.6, "type": "audience" }
+    ],
+    "Director": [
+      {
+        "id": 10457,
+        "filter": "director=10457",
+        "tag": "Maurice Marable",
+        "tagKey": "5e16510dbc1372003ea86fab"
+      }
+    ],
+    "Writer": [
+      {
+        "id": 10458,
+        "filter": "writer=10458",
+        "tag": "Danielle Schneider",
+        "tagKey": "5d7768b91999bc0020dcf3a6",
+        "thumb": "https://metadata-static.plex.tv/0/people/05839339270dbb28f811d157ade54fd1.jpg"
+      },
+      {
+        "id": 10459,
+        "filter": "writer=10459",
+        "tag": "Dannah Feinglass Phirman",
+        "tagKey": "5d77683c2e80df001ebdefc0",
+        "thumb": "https://metadata-static.plex.tv/people/5d77683c2e80df001ebdefc0.jpg"
+      }
+    ],
+    "Role": [
+      {
+        "id": 9751,
+        "filter": "actor=9751",
+        "tag": "Andrew Friedman",
+        "tagKey": "5d77682a61141d001fb13b06",
+        "role": "Charlie's Uncle Jack",
+        "thumb": "https://metadata-static.plex.tv/people/5d77682a61141d001fb13b06.jpg"
+      },
+      {
+        "id": 9715,
+        "filter": "actor=9715",
+        "tag": "Lynne Marie Stewart",
+        "tagKey": "5d7768265af944001f1f66c0",
+        "role": "Charlie's Mom",
+        "thumb": "https://metadata-static.plex.tv/people/5d7768265af944001f1f66c0.jpg"
+      },
+      {
+        "id": 2905,
+        "filter": "actor=2905",
+        "tag": "Sandy Martin",
+        "tagKey": "5d776825999c64001ec2bf84",
+        "role": "Mrs. Mac",
+        "thumb": "https://metadata-static.plex.tv/4/people/4e85aaa851cb66d8a3ad200c12789649.jpg"
+      }
+    ]
+  }
+}

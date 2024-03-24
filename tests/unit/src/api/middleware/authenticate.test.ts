@@ -1,4 +1,4 @@
-import { authenticate } from '../../../../src/api/middleware/authenticate';
+import { authenticate } from '../../../../../src/api/middleware/authenticate';
 import { getMockReq, getMockRes } from '@jest-mock/express';
 import { logger } from '../../../utils/logger';
 

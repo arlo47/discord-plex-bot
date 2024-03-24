@@ -1,7 +1,7 @@
 import {
   formatAudienceRating,
   formatUserRating,
-} from '../../../../src/bot/utils/ratingFormatter';
+} from '../../../../../src/bot/utils/ratingFormatter';
 
 describe('Testing ratingFormatter', () => {
   describe('Testing formatUserRating', () => {
