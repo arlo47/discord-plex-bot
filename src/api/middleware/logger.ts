@@ -18,8 +18,7 @@ export const connectApiLogger = (
   req.logger.info({
     message: 'Start HTTP Request',
     request: {
-      host: req.hostname,
-      url: req.url,
+      url: `${req.protocol}://${req.get('host')}${req.path}`,
       params: req.params,
       query: req.query,
       body: req.body,
