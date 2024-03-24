@@ -1,7 +1,7 @@
 import { PlexThumbnail } from './PlexThumbnail';
 
 export class PlexRating {
-  public thumbnail: PlexThumbnail;
+  public thumbnail: PlexThumbnail | null = null;
 
   constructor(
     public userRating: number,
@@ -12,13 +12,15 @@ export class PlexRating {
     public title: string,
     image: any,
   ) {
-    this.thumbnail = new PlexThumbnail(
-      image.buffer,
-      image.encoding,
-      image.fieldname,
-      image.mimetype,
-      image.originalname,
-      image.size,
-    );
+    if (image) {
+      this.thumbnail = new PlexThumbnail(
+        image.buffer,
+        image.encoding,
+        image.fieldname,
+        image.mimetype,
+        image.originalname,
+        image.size,
+      );
+    }
   }
 }
