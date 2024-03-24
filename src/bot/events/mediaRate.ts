@@ -12,6 +12,9 @@ export const name: string = 'mediaRate';
 
 export const once: boolean = false;
 
+// TODO write a test for this function.
+// mock a buffer image?
+// mock channel.send to confirm content being passed into it?
 export const execute = (
   logger: Logger,
   client: Client,
@@ -23,6 +26,10 @@ export const execute = (
     const channel = client.channels.cache.find((c: Channel) => {
       return c.id === config.discord.channelId;
     });
+
+    if (!channel?.isTextBased()) {
+      throw new Error(`Channel is not text based. Channel ID: ${channel?.id}`);
+    }
 
     logger.info({
       message: 'Emitting Rating Event',
@@ -51,18 +58,27 @@ export const execute = (
           inline: true,
         },
       )
-      .addFields({ name: 'Rating By', value: plexRating.accountName })
-      .setImage(`attachment://${plexRating.thumbnail?.originalName}`);
+      .addFields({ name: 'Rating By', value: plexRating.accountName });
 
-    if (channel?.isTextBased()) {
+    if (plexRating.thumbnail) {
+      mediaRateEmbed.setImage(
+        `attachment://${plexRating.thumbnail?.originalName}`,
+      );
+
+      // TODO combine these 2 channel.send. Having some issue with determining the type channel.send expects.
+      // MessagePayload doesn't seem to have a files array?
       channel.send({
         embeds: [mediaRateEmbed],
-        // files: [
-        //   {
-        //     attachment: plexRating.thumbnail?.buffer,
-        //     name: plexRating.thumbnail?.originalName,
-        //   },
-        // ],
+        files: [
+          {
+            attachment: plexRating.thumbnail?.buffer,
+            name: plexRating.thumbnail?.originalName,
+          },
+        ],
+      });
+    } else {
+      channel.send({
+        embeds: [mediaRateEmbed],
       });
     }
   } catch (err: unknown) {
