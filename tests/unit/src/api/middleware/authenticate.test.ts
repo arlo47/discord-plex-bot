@@ -1,6 +1,6 @@
 import { authenticate } from '../../../../../src/api/middleware/authenticate';
 import { getMockReq, getMockRes } from '@jest-mock/express';
-import { logger } from '../../../utils/logger';
+import { logger } from '../../../utils/logger/logger';
 
 describe('Authentication Middleware', () => {
   it('Should return 401 if token not included', () => {
