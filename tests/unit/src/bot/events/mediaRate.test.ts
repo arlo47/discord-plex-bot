@@ -3,8 +3,9 @@ import { DiscordEventName } from '../../../../../src/utils/constants';
 import { PlexRating } from '../../../../../src/models/PlexRating';
 import { logger } from '../../../utils/logger/logger';
 import * as env from '../../../../../src/utils/config';
-import { mockConfig } from '../../../utils/config';
+import { mockConfig } from '../../../../utils/config';
 import { Logger } from 'winston';
+import { getMockClient } from '../../../../utils/bot';
 
 describe('Testing mediaRate Event', () => {
   beforeEach(() => {
@@ -35,17 +36,10 @@ describe('Testing mediaRate Event', () => {
         undefined,
       );
       const mockLogger = logger as unknown as Logger;
-      const mockClient: any = {
-        channels: {
-          cache: [
-            {
-              id: mockConfig.discord.channelId,
-              isTextBased: () => false,
-              send: jest.fn(),
-            },
-          ],
-        },
-      };
+      const mockClient: any = getMockClient(
+        mockConfig.discord.channelId,
+        false,
+      );
 
       expect(() => {
         mediaRateEvent.execute(mockLogger, mockClient, mockPlexRating);
@@ -63,17 +57,7 @@ describe('Testing mediaRate Event', () => {
         undefined,
       );
       const mockLogger = logger as unknown as Logger;
-      const mockClient: any = {
-        channels: {
-          cache: [
-            {
-              id: mockConfig.discord.channelId,
-              isTextBased: () => true,
-              send: jest.fn(),
-            },
-          ],
-        },
-      };
+      const mockClient: any = getMockClient(mockConfig.discord.channelId, true);
 
       mediaRateEvent.execute(mockLogger, mockClient, mockPlexRating);
       const mockChannel = mockClient.channels.cache[0];

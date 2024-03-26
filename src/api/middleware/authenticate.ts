@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { getConfig } from '../../utils/config';
+import * as env from '../../utils/config';
 import { ResponseMessage } from '../../utils/constants';
 import { ensureError } from '../../utils/error';
 
@@ -9,7 +9,7 @@ export const authenticate = (
   next: NextFunction,
 ) => {
   try {
-    const config = getConfig();
+    const config = env.getConfig();
 
     const { token } = req.query;
     const tokens = config.plex.tokens;

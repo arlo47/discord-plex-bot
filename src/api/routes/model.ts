@@ -1,6 +1,6 @@
 import { PlexRating } from '../../models/PlexRating';
 import { PlexRateEvent } from '../../types/plex';
-import { getClient } from '../../bot/initialize';
+import * as bot from '../../bot/initialize';
 import { Client } from 'discord.js';
 import { Logger } from 'winston';
 import { ensureError } from '../../utils/error';
@@ -24,7 +24,7 @@ export const processRatingWebHook = (
       image,
     );
 
-    const discordClient: Client = getClient();
+    const discordClient: Client = bot.getClient();
     discordClient.emit(
       DiscordEventName.MediaRate,
       logger,
