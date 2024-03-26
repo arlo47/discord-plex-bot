@@ -18,8 +18,13 @@ import server from './api/server';
 const config = getConfig();
 logger.info({ message: 'Config Initialized' });
 
-initializeBot();
+initializeBot().catch((error) => {
+  logger.error({
+    message: 'Error Initializing Bot',
+    error: { message: error.message, stack: error.stack },
+  });
+});
 
-server.listen(config.server.port, () => {
+server.listen(config.server.port, async () => {
   logger.info({ message: 'Server Started', port: config.server.port });
 });

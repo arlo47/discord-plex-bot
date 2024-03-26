@@ -1,5 +1,5 @@
 import { Client, GatewayIntentBits } from 'discord.js';
-import fs from 'fs';
+import fsp from 'node:fs/promises';
 import path from 'path';
 
 import { getConfig } from '../utils/config';
@@ -14,14 +14,16 @@ export const getClient = (): Client => {
   return client;
 };
 
-export const initializeBot = () => {
+export const initializeBot = async () => {
   try {
     client = new Client({
       intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
     });
 
     const eventsPath = path.join(__dirname, 'events');
-    const eventFiles = fs.readdirSync(eventsPath).filter((file) => {
+    const files = await fsp.readdir(eventsPath);
+
+    const eventFiles = files.filter((file) => {
       return file.endsWith('.js') || file.endsWith('.ts');
     });
 
