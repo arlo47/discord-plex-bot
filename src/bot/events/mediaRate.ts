@@ -18,9 +18,6 @@ interface MediaRatePayload {
   files?: { attachment: Buffer; name: string }[];
 }
 
-// TODO write a test for this function.
-// mock a buffer image?
-// mock channel.send to confirm content being passed into it?
 export const execute = (
   logger: Logger,
   client: Client,

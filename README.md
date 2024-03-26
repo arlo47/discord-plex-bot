@@ -1,4 +1,6 @@
-# About The Project
+# Discord Media Rating Bot
+
+## Description
 
 A discord bot that consumes plex web hooks and posts them on discord
 
@@ -17,13 +19,10 @@ A discord bot that consumes plex web hooks and posts them on discord
 
 ## TODO
 
-- date util wrapper
-- tests for bot module
-- restructure API using presenter pattern
-- send webhook image in AttachmentBuilder
-- type for event file variables as object
-- union type of discord.js events & plex webhooks events
-- auto bump version based on keyword in commit messages
+- figure out how to test bot module
+- integration test on POST webhook
+- auto bump version with conventional commits
+- think of better structure for API
 
 ## Documentation
 
