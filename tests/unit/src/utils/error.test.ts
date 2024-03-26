@@ -1,4 +1,4 @@
-import { ensureError } from './error';
+import { ensureError } from '../../../../src/utils/error';
 
 describe('Testing ensureError', () => {
   it('Should return an error when value is a string', () => {
