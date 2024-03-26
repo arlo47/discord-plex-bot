@@ -10,3 +10,7 @@ export enum PlexWebhookEvent {
   Pause = 'media.pause',
   Play = 'media.play',
 }
+
+export enum DiscordEventName {
+  MediaRate = 'mediaRate',
+}

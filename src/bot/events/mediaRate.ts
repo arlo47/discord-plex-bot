@@ -1,5 +1,5 @@
 import { Channel, Client, EmbedBuilder } from 'discord.js';
-import { getConfig } from '../../utils/config';
+import * as env from '../../utils/config';
 import { PlexRating } from '../../models/PlexRating';
 import {
   formatUserRating,
@@ -7,8 +7,9 @@ import {
 } from '../utils/ratingFormatter';
 import { Logger } from 'winston';
 import { ensureError } from '../../utils/error';
+import { DiscordEventName } from '../../utils/constants';
 
-export const name: string = 'mediaRate';
+export const name: string = DiscordEventName.MediaRate;
 
 export const once: boolean = false;
 
@@ -21,7 +22,7 @@ export const execute = (
   plexRating: PlexRating,
 ) => {
   try {
-    const config = getConfig();
+    const config = env.getConfig();
 
     const channel = client.channels.cache.find((c: Channel) => {
       return c.id === config.discord.channelId;

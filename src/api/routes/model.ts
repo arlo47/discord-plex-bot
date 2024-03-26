@@ -5,6 +5,7 @@ import { Client } from 'discord.js';
 import { Logger } from 'winston';
 import { ensureError } from '../../utils/error';
 import { FilePayload } from '../../types/express';
+import { DiscordEventName } from '../../utils/constants';
 
 export const processRatingWebHook = (
   logger: Logger,
@@ -24,7 +25,12 @@ export const processRatingWebHook = (
     );
 
     const discordClient: Client = getClient();
-    discordClient.emit('mediaRate', logger, discordClient, plexRating);
+    discordClient.emit(
+      DiscordEventName.MediaRate,
+      logger,
+      discordClient,
+      plexRating,
+    );
   } catch (err: unknown) {
     const error: Error = ensureError(err);
     logger.error({
