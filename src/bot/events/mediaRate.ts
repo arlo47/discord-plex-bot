@@ -17,7 +17,7 @@ interface MediaRatePayload {
   embeds: EmbedBuilder[];
   files?: { attachment: Buffer; name: string }[];
 }
-// test
+
 export const execute = (
   logger: Logger,
   client: Client,
