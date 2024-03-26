@@ -13,6 +13,11 @@ export const name: string = DiscordEventName.MediaRate;
 
 export const once: boolean = false;
 
+interface MediaRatePayload {
+  embeds: EmbedBuilder[];
+  files?: { attachment: Buffer; name: string }[];
+}
+
 // TODO write a test for this function.
 // mock a buffer image?
 // mock channel.send to confirm content being passed into it?
@@ -23,6 +28,10 @@ export const execute = (
 ) => {
   try {
     const config = env.getConfig();
+
+    const channelPlayload: MediaRatePayload = {
+      embeds: [],
+    };
 
     const channel = client.channels.cache.find((c: Channel) => {
       return c.id === config.discord.channelId;
@@ -65,23 +74,16 @@ export const execute = (
       mediaRateEmbed.setImage(
         `attachment://${plexRating.thumbnail?.originalName}`,
       );
-
-      // TODO combine these 2 channel.send. Having some issue with determining the type channel.send expects.
-      // MessagePayload doesn't seem to have a files array?
-      channel.send({
-        embeds: [mediaRateEmbed],
-        files: [
-          {
-            attachment: plexRating.thumbnail?.buffer,
-            name: plexRating.thumbnail?.originalName,
-          },
-        ],
-      });
-    } else {
-      channel.send({
-        embeds: [mediaRateEmbed],
-      });
+      channelPlayload.files = [
+        {
+          attachment: plexRating.thumbnail?.buffer,
+          name: plexRating.thumbnail?.originalName,
+        },
+      ];
     }
+
+    channelPlayload.embeds.push(mediaRateEmbed);
+    channel.send(channelPlayload);
   } catch (err: unknown) {
     const error: Error = ensureError(err);
     logger.error({
