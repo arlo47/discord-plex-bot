@@ -19,7 +19,7 @@ router.get('/', controller.getRoot);
 router.post(
   '/webhook',
   [
-    upload.single('thumb'),
+    upload.single('thumbnail'),
     authenticate,
     parseWebHook,
     validateWebHookType,
