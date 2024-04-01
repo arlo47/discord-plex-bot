@@ -88,5 +88,6 @@ export const execute = (
       message: 'Error Emitting Rating Event',
       error: { err: error.message, stack: error.stack },
     });
+    throw error;
   }
 };
