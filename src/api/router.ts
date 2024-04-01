@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request } from 'express';
 import controller from './routes/controller';
 import multer, { FileFilterCallback, Multer } from 'multer';
 import { authenticate } from './middleware/authenticate';
@@ -7,16 +7,23 @@ import {
   validateWebHookType,
   validateName,
 } from './middleware/webhooks';
+import { ImageMimeType } from '../utils/constants';
 
 const router = Router();
 
 const upload: Multer = multer({
-  fileFilter(req, file: Express.Multer.File, cb: FileFilterCallback) {
+  fileFilter(req: Request, file: Express.Multer.File, cb: FileFilterCallback) {
+    /**
+     * FileFilterCallback second parameter is a boolean,
+     * true returns file, false filters file out
+     */
     req.logger.info({ message: 'FileFilter Info', file });
-    // Plex sends a multi-part request for rating events. First part is a thumbnail
-    // image, second is the JSON payload. I don't care about the image. This drops the
-    // image.
-    cb(null, false);
+
+    if (file.mimetype in ImageMimeType) {
+      cb(null, true);
+    } else {
+      cb(null, false);
+    }
   },
 });
 

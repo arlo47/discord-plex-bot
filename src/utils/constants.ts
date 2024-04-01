@@ -10,3 +10,11 @@ export enum PlexWebhookEvent {
   Pause = 'media.pause',
   Play = 'media.play',
 }
+
+const IMAGE = 'image';
+
+export enum ImageMimeType {
+  Jpeg = `${IMAGE}/jpeg`,
+  Png = `${IMAGE}/png`,
+  Gif = `${IMAGE}/gif`,
+}
