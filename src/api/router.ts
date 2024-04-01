@@ -19,7 +19,7 @@ const upload: Multer = multer({
      */
     req.logger.info({ message: 'FileFilter Info', file });
 
-    if (file.mimetype in ImageMimeType) {
+    if (Object.values(ImageMimeType).includes(file.mimetype as ImageMimeType)) {
       cb(null, true);
     } else {
       cb(null, false);

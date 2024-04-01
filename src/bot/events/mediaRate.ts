@@ -7,6 +7,11 @@ import {
 } from '../utils/ratingFormatter';
 import { Logger } from 'winston';
 
+interface MediaRatePayload {
+  embeds: EmbedBuilder[];
+  files?: { attachment: Buffer; name: string }[];
+}
+
 export const name: string = 'mediaRate';
 
 export const once: boolean = false;
@@ -19,9 +24,17 @@ export const execute = (
   try {
     const config = getConfig();
 
+    const channelPlayload: MediaRatePayload = {
+      embeds: [],
+    };
+
     const channel = client.channels.cache.find((c: Channel) => {
       return c.id === config.discord.channelId;
     });
+
+    if (!channel?.isTextBased()) {
+      throw new Error(`Channel is not text based. Channel ID: ${channel?.id}`);
+    }
 
     logger.info({
       message: 'Emitting Rating Event',
@@ -52,9 +65,20 @@ export const execute = (
       )
       .addFields({ name: 'Rating By', value: plexRating.accountName });
 
-    if (channel?.isTextBased()) {
-      channel.send({ embeds: [mediaRateEmbed] });
+    if (plexRating.thumbnail) {
+      mediaRateEmbed.setImage(
+        `attachment://${plexRating.thumbnail?.originalName}`,
+      );
+      channelPlayload.files = [
+        {
+          attachment: plexRating.thumbnail?.buffer,
+          name: plexRating.thumbnail?.originalName,
+        },
+      ];
     }
+
+    channelPlayload.embeds.push(mediaRateEmbed);
+    channel.send(channelPlayload);
   } catch (error: any) {
     logger.error({
       message: 'Error Emitting Rating Event',
