@@ -2,11 +2,11 @@ import { Client, GatewayIntentBits } from 'discord.js';
 import fs from 'fs';
 import path from 'path';
 
-import { getConfig } from '../utils/config';
+import * as env from '../utils/config';
 import { logger } from '../logger/logger';
 import { ensureError } from '../utils/error';
 
-const config = getConfig();
+const config = env.getConfig();
 
 let client: Client;
 

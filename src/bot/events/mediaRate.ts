@@ -1,5 +1,5 @@
 import { Channel, Client, EmbedBuilder } from 'discord.js';
-import { getConfig } from '../../utils/config';
+import * as env from '../../utils/config';
 import { PlexRating } from '../../models/PlexRating';
 import {
   formatUserRating,
@@ -24,7 +24,7 @@ export const execute = (
   plexRating: PlexRating,
 ) => {
   try {
-    const config = getConfig();
+    const config = env.getConfig();
 
     const channelPlayload: MediaRatePayload = {
       embeds: [],
