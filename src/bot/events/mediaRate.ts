@@ -6,6 +6,7 @@ import {
   formatAudienceRating,
 } from '../utils/ratingFormatter';
 import { Logger } from 'winston';
+import { ensureError } from '../../utils/error';
 
 interface MediaRatePayload {
   embeds: EmbedBuilder[];
@@ -79,7 +80,9 @@ export const execute = (
 
     channelPlayload.embeds.push(mediaRateEmbed);
     channel.send(channelPlayload);
-  } catch (error: any) {
+  } catch (err: unknown) {
+    const error: Error = ensureError(err);
+
     logger.error({
       message: 'Error Emitting Rating Event',
       error: { err: error.message, stack: error.stack },

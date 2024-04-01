@@ -4,6 +4,7 @@ import path from 'path';
 
 import { getConfig } from '../utils/config';
 import { logger } from '../logger/logger';
+import { ensureError } from '../utils/error';
 
 const config = getConfig();
 
@@ -40,7 +41,9 @@ export const initializeBot = () => {
     });
 
     client.login(config.discord.token);
-  } catch (error: any) {
+  } catch (err: unknown) {
+    const error: Error = ensureError(err);
+
     logger.error({
       message: 'Bot Failed To Initialized',
       error: { error: error.message, stack: error.stack },

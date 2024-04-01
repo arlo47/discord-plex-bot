@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { ResponseMessage, PlexWebhookEvent } from '../../utils/constants';
 import { PlexRateEvent } from '../../types/plex';
+import { ensureError } from '../../utils/error';
 
 export const parseWebHook = (
   req: Request,
@@ -14,7 +15,8 @@ export const parseWebHook = (
     req.body = payload;
 
     next();
-  } catch (error: any) {
+  } catch (err: unknown) {
+    const error: Error = ensureError(err);
     req.logger.error({
       message: 'Error in parseWebhook middleware',
       error: { err: error.message, stack: error.stack },

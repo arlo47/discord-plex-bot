@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { getConfig } from '../../utils/config';
 import { ResponseMessage } from '../../utils/constants';
+import { ensureError } from '../../utils/error';
 
 export const authenticate = (
   req: Request,
@@ -23,7 +24,8 @@ export const authenticate = (
     }
 
     next();
-  } catch (error: any) {
+  } catch (err: unknown) {
+    const error: Error = ensureError(err);
     req.logger.error({
       message: 'Error in authenticate middleware',
       error: { err: error.message, stack: error.stack },
