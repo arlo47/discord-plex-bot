@@ -31,6 +31,7 @@ export const validateName = (
   const { name } = req.query;
 
   if (typeof name !== 'string' && typeof name !== 'undefined') {
+    req.logger.error({ error: 'Error in validateName', name });
     return res.status(400).send({ message: ResponseMessage.GenericError });
   }
 
@@ -45,6 +46,10 @@ export const validateWebHookType = (
   const payload: PlexRateEvent = req.body;
 
   if (payload.event !== PlexWebhookEvent.Rate) {
+    req.logger.error({
+      error: 'Error in validateWebHookType',
+      event: payload.event,
+    });
     return res.status(400).send({ message: ResponseMessage.GenericError });
   }
 

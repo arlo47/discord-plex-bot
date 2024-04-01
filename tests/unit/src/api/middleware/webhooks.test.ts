@@ -4,6 +4,7 @@ import {
   validateName,
   validateWebHookType,
 } from '../../../../../src/api/middleware/webhooks';
+import { logger } from '../../../utils/logger';
 
 describe('Webhooks Middleware', () => {
   describe('validateName', () => {
@@ -26,7 +27,7 @@ describe('Webhooks Middleware', () => {
     });
 
     it('Should return 400 if name is string[]', () => {
-      const req = getMockReq({ query: { name: ['name1', 'name2'] } });
+      const req = getMockReq({ query: { name: ['name1', 'name2'] }, logger });
       const { res, next } = getMockRes();
 
       validateName(req, res, next);
@@ -59,7 +60,7 @@ describe('Webhooks Middleware', () => {
 
   describe('validateWebHookType', () => {
     it('Should pass if event type is rate', () => {
-      const req = getMockReq({ body: { event: 'media.rate' } });
+      const req = getMockReq({ body: { event: 'media.rate' }, logger });
       const { res, next } = getMockRes();
 
       validateWebHookType(req, res, next);
@@ -68,7 +69,7 @@ describe('Webhooks Middleware', () => {
     });
 
     it('Should return 400 if event type is pause', () => {
-      const req = getMockReq({ body: { event: 'media.pause' } });
+      const req = getMockReq({ body: { event: 'media.pause' }, logger });
       const { res, next } = getMockRes();
 
       validateWebHookType(req, res, next);
@@ -77,7 +78,7 @@ describe('Webhooks Middleware', () => {
     });
 
     it('Should return 400 if event type is resume', () => {
-      const req = getMockReq({ body: { event: 'media.resume' } });
+      const req = getMockReq({ body: { event: 'media.resume' }, logger });
       const { res, next } = getMockRes();
 
       validateWebHookType(req, res, next);

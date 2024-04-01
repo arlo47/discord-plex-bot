@@ -12,6 +12,7 @@ const router = Router();
 
 const upload: Multer = multer({
   fileFilter(req, file: Express.Multer.File, cb: FileFilterCallback) {
+    req.logger.info({ message: 'FileFilter Info', file });
     // Plex sends a multi-part request for rating events. First part is a thumbnail
     // image, second is the JSON payload. I don't care about the image. This drops the
     // image.
