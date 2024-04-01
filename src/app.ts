@@ -12,10 +12,10 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 import { initializeBot } from './bot/initialize';
-import { getConfig } from './utils/config';
+import * as env from './utils/config';
 import server from './api/server';
 
-const config = getConfig();
+const config = env.getConfig();
 logger.info({ message: 'Config Initialized' });
 
 initializeBot();

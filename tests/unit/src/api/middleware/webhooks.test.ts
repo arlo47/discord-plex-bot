@@ -4,7 +4,7 @@ import {
   validateName,
   validateWebHookType,
 } from '../../../../../src/api/middleware/webhooks';
-import { logger } from '../../../utils/logger';
+import { logger } from '../../../utils/logger/logger';
 
 describe('Webhooks Middleware', () => {
   describe('validateName', () => {

@@ -11,6 +11,11 @@ export enum PlexWebhookEvent {
   Play = 'media.play',
 }
 
+export enum DiscordEventName {
+  Rate = 'mediaRate',
+  Ready = 'ready',
+}
+
 const IMAGE = 'image';
 
 export enum ImageMimeType {

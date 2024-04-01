@@ -1,5 +1,5 @@
 import { Channel, Client, EmbedBuilder } from 'discord.js';
-import { getConfig } from '../../utils/config';
+import * as env from '../../utils/config';
 import { PlexRating } from '../../models/PlexRating';
 import {
   formatUserRating,
@@ -7,13 +7,14 @@ import {
 } from '../utils/ratingFormatter';
 import { Logger } from 'winston';
 import { ensureError } from '../../utils/error';
+import { DiscordEventName } from '../../utils/constants';
 
 interface MediaRatePayload {
   embeds: EmbedBuilder[];
   files?: { attachment: Buffer; name: string }[];
 }
 
-export const name: string = 'mediaRate';
+export const name: DiscordEventName = DiscordEventName.Rate;
 
 export const once: boolean = false;
 
@@ -23,7 +24,7 @@ export const execute = (
   plexRating: PlexRating,
 ) => {
   try {
-    const config = getConfig();
+    const config = env.getConfig();
 
     const channelPlayload: MediaRatePayload = {
       embeds: [],
@@ -87,5 +88,6 @@ export const execute = (
       message: 'Error Emitting Rating Event',
       error: { err: error.message, stack: error.stack },
     });
+    throw error;
   }
 };
