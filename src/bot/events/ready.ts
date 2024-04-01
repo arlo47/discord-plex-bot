@@ -1,7 +1,8 @@
-import { Client, Events } from 'discord.js';
+import { Client } from 'discord.js';
 import { logger } from '../../logger/logger';
+import { DiscordEventName } from '../../utils/constants';
 
-export const name: Events = Events.ClientReady;
+export const name: DiscordEventName = DiscordEventName.Ready;
 
 export const once: boolean = false;
 

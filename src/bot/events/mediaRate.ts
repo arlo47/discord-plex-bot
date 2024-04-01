@@ -7,13 +7,14 @@ import {
 } from '../utils/ratingFormatter';
 import { Logger } from 'winston';
 import { ensureError } from '../../utils/error';
+import { DiscordEventName } from '../../utils/constants';
 
 interface MediaRatePayload {
   embeds: EmbedBuilder[];
   files?: { attachment: Buffer; name: string }[];
 }
 
-export const name: string = 'mediaRate';
+export const name: DiscordEventName = DiscordEventName.Rate;
 
 export const once: boolean = false;
 
